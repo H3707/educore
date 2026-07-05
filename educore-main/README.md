@@ -76,6 +76,7 @@ Cumplimiento de todos los puntos del enunciado y rúbrica
 4. Ejecutar la clase principal desde la carpeta  view/ 
  
  
+
  
 
 
