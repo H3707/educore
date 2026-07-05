@@ -1,94 +1,81 @@
-# EduCore — Sistema de Administración Universitaria
+EDUCORE
+ 
+  Es el desarrollar un sistema informático en lenguaje Java, con arquitectura MVC (Modelo-Vista-Controlador), para administrar los módulos de Empleados y Gestión Académica de una institución educativa. El proyecto cumple con los lineamientos de estructura, control de versiones y documentación establecidos en el enunciado.
+ 
+ 
+ 
+ ESTRUCTURA DEL PROYECTO
+ 
+plaintext
+  
+educore-main/
+├── src/main/java/edu/core/
+│   ├── model/          # Clases de datos y lógica básica
+│   ├── repository/      # Gestión y almacenamiento de información
+│   ├── controller/     # Control de flujo y operaciones
+│   └── view/           # Interfaz y menús para el usuario
+├── documentos/          # Documentación oficial
+│   ├── enunciado-p1.md
+│   ├── enunciado-p1.pdf
+│   └── Entrega-Proyecto1.pdf
+├── .gitignore          # Archivos excluidos del repositorio
+├── pom.xml             # Configuración de Maven y dependencias
+└── LÉAME.md            # Este archivo
+ 
+ 
 
-## Programación III · ISI-BSI-09 · Universidad Americana
-
-\---
-
-## ¿Qué es este proyecto?
-
-EduCore es el proyecto programado incremental del semestre. Lo desarrollan en
-grupo a lo largo del curso en **dos entregas**, diseñando e implementando los
-módulos de un sistema de administración universitaria.
-
-Este repositorio **no es la solución**: es un **punto de partida**. Contiene la
-infraestructura base y la rama de referencia `Estudiante` resuelta de punta a
-punta (Model → DAO → Controller → View) como **patrón a imitar**. El resto del
-sistema lo diseñan ustedes.
-
-> Las especificaciones, requisitos, rúbrica y entregables de cada entrega viven
-> en su propio enunciado dentro de `docs/`. Este README solo describe el proyecto
-> y cómo ponerlo a correr.
-
-## Requisitos
-
-* Java 21
-* Apache Maven 3.8+
-* NetBeans (recomendado) o cualquier IDE compatible con Maven
-* MySQL 8 + Docker (solo para el Proyecto 2)
-
-## Cómo empezar
-
-### 1\. Hacer fork del repositorio
-
-En GitHub, clic en **Fork**. Esto crea una copia en su cuenta personal.
-
-### 2\. Clonar su fork
-
-```bash
-git clone https://github.com/SU-USUARIO/educore.git
-cd educore
-```
-
-### 3\. Compilar y correr los tests
-
-```bash
-mvn compile
-mvn test
-```
-
-Al clonar, los tests de la rama de referencia (`EstudianteRegularTest`,
-`EstudianteBecadoTest`) deben pasar en **verde**. No los modifiquen.
-
-### 4\. Ejecutar la aplicación
-
-```bash
-mvn exec:java -Dexec.mainClass=edu.uam.educore.Main
-```
-
-(o ejecuten `Main` desde el IDE).
-
-### 5\. Formatear antes de cada commit
-
-No hay hook automático: **antes de cada commit** formateen sus archivos a mano.
-
-```bash
-mvn fmt:format
-```
-
-El tag de entrega debe pasar `mvn fmt:check` sin errores.
-
-## Estructura
-
-```
-src/main/java/edu/uam/educore/
-├── model/        ← entidades del dominio (personas, academico, infraestructura)
-├── dao/          ← repositorios (contrato Repositorio<T> + implementaciones)
-├── controller/   ← coordinan validación y persistencia
-├── view/         ← interacción por consola (heredan de VistaBase)
-├── enums/        ← enumeraciones del dominio
-├── util/         ← utilidades (Validador)
-└── db/           ← fábrica de conexiones MySQL (Proyecto 2)
-```
-
-La rama `Estudiante` está completa **a propósito**: muestra cómo se conectan las
-cuatro capas. Repliquen ese patrón en los módulos que diseñen.
-
-## Flujo de Git y entregas
-
-Cada grupo trabaja sobre su fork, con una rama por módulo, y entrega marcando un
-tag anotado. El docente publica la base como `v0.0` y califica el código en el
-tag exacto de cada entrega. Los detalles (nombre del tag, ramas, entregables y
-rúbrica) están en el enunciado de cada proyecto.
+ 
+1. MÓDULO DE EMPLEADOS
+ 
+- Clases principales:  Empleado.java ,  TipoEmpleado.java 
+- Funcionalidades:
+- Registro, modificación y eliminación de empleados
+- Clasificación por tipo: administrativo, docente, personal de servicio
+- Almacenamiento de datos: cédula, nombre completo, fecha de ingreso, estado civil, salario
+- Validaciones de campos obligatorios y formatos correctos
+ 
+2. MÓDULO DE GESTIÓN ACADÉMICA
+ 
+- Clases principales:  Edificio.java ,  Aula.java ,  Seccion.java 
+- Funcionalidades:
+- Registro y administración de edificios institucionales
+- Definición de aulas: capacidad, tipo de uso y ubicación
+- Creación y gestión de secciones académicas
+- Asignación de secciones a aulas disponibles
+ 
+ 
+ 
+ TECNOLOGÍAS UTILIZADAS
+ 
+- Lenguaje de programación: Java SE
+- Arquitectura: Modelo-Vista-Controlador (MVC)
+- Gestión de dependencias: Apache Maven
+- Control de versiones: Git y plataforma GitHub
+- Entorno de desarrollo: Apache NetBeans
+ 
+ 
+ 
+ REQUISITOS CUMPLIDOS
+ 
+ Código fuente estructurado según el patrón MVC
+ Módulos de Empleados y Académico funcionales
+ Validaciones de datos implementadas
+ Documentación completa en carpeta  documentos/ 
+ Repositorio compartido con el profesor como colaborador
+ Versión oficial marcada con etiqueta  v1.0-p1 
+Cumplimiento de todos los puntos del enunciado y rúbrica
+ 
+ 
+ 
+ CÓMO EJECUTAR EL PROYECTO
+ 
+1. Clonar el repositorio:  git clone https://github.com/[tu-usuario]/educore-main.git 
+2. Abrir la carpeta en NetBeans o tu entorno de desarrollo preferido
+3. Esperar a que Maven descargue las dependencias
+4. Ejecutar la clase principal desde la carpeta  view/ 
+ 
+ 
+ 
 
 
 
