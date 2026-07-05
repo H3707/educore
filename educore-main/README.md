@@ -52,6 +52,7 @@ educore-main/
 - Gestión de dependencias: Apache Maven
 - Control de versiones: Git y plataforma GitHub
 - Entorno de desarrollo: Apache NetBeans
+
  
  
  
