@@ -13,14 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * @author
  */
 public class EmpleadoController {
 
   private final Repositorio<Empleado> repo;
   private int proximoId = 1;
-  
+
   private final String MensajeNoSeEncontroId = "No se encontro ningun empleado con el Id";
 
   public EmpleadoController(Repositorio<Empleado> repo) {
@@ -28,32 +27,29 @@ public class EmpleadoController {
   }
 
   public Empleado registrar(
-          String nombre, 
-          String apellidos, 
-          String email, 
-          double salario, 
-          LocalDate fechaIngreso, 
-          TipoEmpleado tipo) 
-          throws Exception 
-  {
-      
-    validarBase(nombre,apellidos, email, salario, fechaIngreso, tipo);
-    
+      String nombre,
+      String apellidos,
+      String email,
+      double salario,
+      LocalDate fechaIngreso,
+      TipoEmpleado tipo)
+      throws Exception {
+
+    validarBase(nombre, apellidos, email, salario, fechaIngreso, tipo);
+
     Empleado e = new Empleado(proximoId, nombre, apellidos, email, salario, fechaIngreso, tipo);
     repo.guardar(e);
     proximoId++;
     return e;
   }
 
-  public List<Empleado> listar()
-          throws Exception {
-      
+  public List<Empleado> listar() throws Exception {
+
     return repo.buscarTodos();
   }
 
-  public Empleado buscarPorId(int id)
-          throws Exception {
-      
+  public Empleado buscarPorId(int id) throws Exception {
+
     Optional<Empleado> resultado = repo.buscarPorId(id);
     if (resultado.isPresent()) {
       return resultado.get();
@@ -62,22 +58,22 @@ public class EmpleadoController {
   }
 
   public Empleado actualizar(
-          int id, 
-          String nombre, 
-          String apellidos, 
-          String email, 
-          double salario, 
-          LocalDate fechaIngreso, 
-          TipoEmpleado tipo) 
-          throws Exception {
-      
+      int id,
+      String nombre,
+      String apellidos,
+      String email,
+      double salario,
+      LocalDate fechaIngreso,
+      TipoEmpleado tipo)
+      throws Exception {
+
     Empleado e = buscarPorId(id);
     if (e == null) {
       throw new IllegalArgumentException(MensajeNoSeEncontroId + ": " + id + ".");
     }
-    
+
     validarBase(nombre, apellidos, email, salario, fechaIngreso, tipo);
-    
+
     e.setNombre(nombre);
     e.setApellidos(apellidos);
     e.setEmail(email);
@@ -98,7 +94,13 @@ public class EmpleadoController {
 
   // ── Helpers internos ──────────────────────────────────────────────────────
 
-  private void validarBase(String nombre, String apellidos, String email, double salario, LocalDate fechaIngreso, TipoEmpleado tipo) {
+  private void validarBase(
+      String nombre,
+      String apellidos,
+      String email,
+      double salario,
+      LocalDate fechaIngreso,
+      TipoEmpleado tipo) {
     if (nombre.isEmpty() || apellidos.isEmpty()) {
       throw new IllegalArgumentException("Nombre y apellidos son obligatorios.");
     }

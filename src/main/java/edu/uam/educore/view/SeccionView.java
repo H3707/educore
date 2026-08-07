@@ -14,19 +14,17 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
  * @author
  */
-
 public class SeccionView extends VistaBase {
   private final SeccionController controller;
 
   public SeccionView(
-          Scanner scanner, 
-          Repositorio<Seccion> secRepo, 
-          Repositorio<Empleado> empRepo,
-          Repositorio<Estudiante> estRepo, 
-          Repositorio<Edificio> edifRepo) {
+      Scanner scanner,
+      Repositorio<Seccion> secRepo,
+      Repositorio<Empleado> empRepo,
+      Repositorio<Estudiante> estRepo,
+      Repositorio<Edificio> edifRepo) {
     super(scanner);
     this.controller = new SeccionController(secRepo, empRepo, estRepo, edifRepo);
   }
@@ -71,10 +69,15 @@ public class SeccionView extends VistaBase {
     List<Seccion> lista = controller.listar();
     if (lista.isEmpty()) mostrarMensaje("No hay secciones.");
     for (Seccion s : lista) {
-      System.out.println(String.format("Identificador: %d | %s - %s | Aula: %s | Docente: %s | Inscritos: %d", 
-          s.getId(), s.getCodigo(), s.getNombre(), 
-          s.getAula().getNumero(), s.getDocente().getNombre(), 
-          s.getEstudiantes().size()));
+      System.out.println(
+          String.format(
+              "Identificador: %d | %s - %s | Aula: %s | Docente: %s | Inscritos: %d",
+              s.getId(),
+              s.getCodigo(),
+              s.getNombre(),
+              s.getAula().getNumero(),
+              s.getDocente().getNombre(),
+              s.getEstudiantes().size()));
     }
   }
 

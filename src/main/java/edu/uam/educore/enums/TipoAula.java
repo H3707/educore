@@ -4,13 +4,11 @@
  */
 package edu.uam.educore.enums;
 
-
 /**
- *
- * @author 
+ * @author
  */
 public enum TipoAula {
-    REGULAR,
-    LABORATORIO,
-    AUDITORIO
+  REGULAR,
+  LABORATORIO,
+  AUDITORIO
 }

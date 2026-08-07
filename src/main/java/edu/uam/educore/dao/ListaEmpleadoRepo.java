@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * @author
  */
 public class ListaEmpleadoRepo extends Repositorio<Empleado> {

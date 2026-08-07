@@ -6,17 +6,15 @@ package edu.uam.educore.view;
 
 import edu.uam.educore.controller.EdificioController;
 import edu.uam.educore.dao.Repositorio;
+import edu.uam.educore.enums.TipoAula;
 import edu.uam.educore.model.infraestructura.Aula;
 import edu.uam.educore.model.infraestructura.Edificio;
-import edu.uam.educore.enums.TipoAula;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- *
  * @author
  */
-
 public class EdificioView extends VistaBase {
   private final EdificioController controller;
 
@@ -39,36 +37,24 @@ public class EdificioView extends VistaBase {
       int opcion = leerEntero("Opcion");
 
       try {
-        if (opcion == 1) 
-        {
-            registrarEdificio();
+        if (opcion == 1) {
+          registrarEdificio();
+        } else if (opcion == 2) {
+          listarEdificios();
+        } else if (opcion == 3) {
+          buscarEdificio();
+        } else if (opcion == 4) {
+          eliminarEdificio();
+        } else if (opcion == 5) {
+          agregarAula();
+        } else if (opcion == 6) {
+          eliminarAula();
+        } else if (opcion == 0) {
+          activo = false;
+        } else {
+          mostrarError("Opcion incorrecta");
         }
-        else if (opcion == 2)
-        {
-            listarEdificios();
-        }
-        else if (opcion == 3) 
-        {
-            buscarEdificio();
-        }
-        else if (opcion == 4) {
-            eliminarEdificio();
-        }
-        else if (opcion == 5) {
-            agregarAula();
-        }
-        else if (opcion == 6) {
-            eliminarAula();
-        }
-        else if (opcion == 0) {
-            activo = false;
-        }
-        
-        else 
-        {
-            mostrarError("Opcion incorrecta");
-        }
-        
+
       } catch (Exception e) {
         mostrarError(e.getMessage());
       }
@@ -84,29 +70,45 @@ public class EdificioView extends VistaBase {
 
   private void listarEdificios() throws Exception {
     List<Edificio> lista = controller.listarEdificios();
-    if (lista.isEmpty())
-    {
-        mostrarMensaje("No hay edificios.");
+    if (lista.isEmpty()) {
+      mostrarMensaje("No hay edificios.");
     }
     for (Edificio e : lista) {
-      System.out.println("Identificador: " + e.getId() + " | " + e.getCodigo() + " - " + e.getNombre() + " (" + e.getAulas().size() + " aulas)");
+      System.out.println(
+          "Identificador: "
+              + e.getId()
+              + " | "
+              + e.getCodigo()
+              + " - "
+              + e.getNombre()
+              + " ("
+              + e.getAulas().size()
+              + " aulas)");
     }
   }
 
   private void buscarEdificio() throws Exception {
     int id = leerEntero("identificador del edificio");
     Edificio e = controller.buscarEdificio(id);
-    if (e == null) { 
-        mostrarError("No encontrado."); 
-        return;
+    if (e == null) {
+      mostrarError("No encontrado.");
+      return;
     }
-    
+
     System.out.println("Edificio: " + e.getNombre());
-    if (e.getAulas().isEmpty()){
-        System.out.println("  No tiene aulas registradas.");
+    if (e.getAulas().isEmpty()) {
+      System.out.println("  No tiene aulas registradas.");
     }
     for (Aula a : e.getAulas()) {
-      System.out.println("  Aula ID: " + a.getId() + " | Numero: " + a.getNumero() + " | Capacidad: " + a.getCapacidad() + " | " + a.getTipo());
+      System.out.println(
+          "  Aula ID: "
+              + a.getId()
+              + " | Numero: "
+              + a.getNumero()
+              + " | Capacidad: "
+              + a.getCapacidad()
+              + " | "
+              + a.getTipo());
     }
   }
 
@@ -125,15 +127,14 @@ public class EdificioView extends VistaBase {
     int capacidad = leerEntero("Capacidad");
     System.out.println("Tipo (1. REGULAR, 2. LABORATORIO, 3. AUDITORIO)");
     int tipoOpt = leerEntero("Opcion");
-    
+
     TipoAula tipo = TipoAula.REGULAR;
-    
-    switch(tipoOpt)
-    {
-        case 2 -> tipo = TipoAula.LABORATORIO;
-        case 3 -> tipo = TipoAula.AUDITORIO;
+
+    switch (tipoOpt) {
+      case 2 -> tipo = TipoAula.LABORATORIO;
+      case 3 -> tipo = TipoAula.AUDITORIO;
     }
-    
+
     Aula a = controller.agregarAula(edificioId, numero, capacidad, tipo);
     mostrarMensaje("Aula registrada con el identificador: " + a.getId());
   }
